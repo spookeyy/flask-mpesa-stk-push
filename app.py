@@ -16,9 +16,9 @@ mpesa_token_url = os.getenv('MPESA_TOKEN_URL')
 
 @app.route('/')
 def index():
-    return 'My Mpesa Integration service'
+    return "Spookie's Mpesa Integration service"
 
-my_endpoint = "https://811b-102-219-208-226.ngrok-free.app"
+my_endpoint = "https://webhook.site/9e1a6307-9adc-465b-a37b-78db245785a7"
 
 # simulate
 @app.route('/pay', methods=['POST', 'GET'])
@@ -76,7 +76,8 @@ def MpesaExpress():
 @app.route("/callback", methods=['POST'])
 def callback():
     data = request.get_json()
-    print(data)
+    app.logger.info(f"Callback data: {data}")
+    print(f"Full callback request: {request.headers}\n{data}")
     return data, 200
 
 def getAccessToken():
@@ -98,7 +99,7 @@ def getAccessToken():
         # Check for HTTP errors
         res.raise_for_status()
         
-        # Print response for debugging
+        # for debugging
         print(f"Response status: {res.status_code}")
         print(f"Response content: {res.text[:100]}...")
         
